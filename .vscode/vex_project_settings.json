@@ -1,0 +1,19 @@
+{
+	"extension": {
+		"version": "0.6.1",
+		"json": 2
+	},
+	"project": {
+		"name": "EngDemo-EXP",
+		"description": "",
+		"creationDate": "4/6/2025, 10:57:00 AM",
+		"platform": "EXP",
+		"language": "cpp",
+		"slot": 1,
+		"sdkVersion": "EXP_20240802_15_00_00",
+		"cpp": {
+			"includePath": [],
+			"printf_float": true
+		}
+	}
+}
