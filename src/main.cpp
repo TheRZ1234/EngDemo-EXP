@@ -24,10 +24,10 @@ inertial BrainInertial = inertial();
 MOTORS + CONTROLLER
 TD: change ports
 */
-motor Left1 = motor(PORT6, false);
-motor Right1 = motor(PORT10, true);
-motor Left2 = motor(PORT6, false);
-motor Right2 = motor(PORT10, true);
+motor Left1 = motor(PORT6, true);
+motor Right1 = motor(PORT9, false);
+motor Left2 = motor(PORT7, true);
+motor Right2 = motor(PORT10, false);
 
 motor_group Left = motor_group(Left1, Left2);
 motor_group Right = motor_group(Right1, Right2);
@@ -37,7 +37,7 @@ controller Controller = controller();
 /*
 CONSTANTS
 */
-const float deadZone = 5.0;
+const float deadZone = 10.0;
 
 int main() 
 {
