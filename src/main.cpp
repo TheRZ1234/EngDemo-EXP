@@ -22,7 +22,6 @@ inertial BrainInertial = inertial();
 
 /*
 MOTORS + CONTROLLER
-TD: change ports
 */
 motor Left1 = motor(PORT6, true);
 motor Right1 = motor(PORT9, false);
@@ -37,13 +36,36 @@ controller Controller = controller();
 /*
 CONSTANTS
 */
-const float deadZone = 10.0;
+const float deadZone = 20.0; // upd deadZone: 10.0 -> 20.0
+const float forwardPercent = 0.75; // decrease forward speed
+const float turnPercent = 0.5; // one stick controls forward and the other controls turn
 
 int main() 
 {
     // Main controller loop
     while (true) 
     {
+        /*
+        UPDATED DRIVE
+        */
+        if (abs(Controller.Axis2.position()) > deadZone) 
+        {
+            Left.setVelocity(Controller.Axis2.position()*forwardPercent, percent);
+            Right.setVelocity(Controller.Axis2.position()*forwardPercent, percent);
+        } 
+        else
+        {
+            Left.setVelocity(0, percent);
+            Right.setVelocity(0, percent);
+        }
+
+        if (abs(Controller.Axis4.position()) > deadZone)
+        {
+            Left.setVelocity(Left.velocity()*(1.0+Controller.Axis4.position()/100.0)*turnPercent, percent);
+            Right.setVelocity(Right.velocity()*(1.0-Controller.Axis4.position()/100.0)*turnPercent, percent);
+        }
+
+        /* TANK DRIVE
         if (abs(Controller.Axis2.position()) > deadZone) 
         {
             Right.setVelocity(Controller.Axis2.position(), percent);
@@ -60,7 +82,7 @@ int main()
         else 
         {
             Left.setVelocity(0, percent);
-        }
+        }*/
 
         Left.spin(forward);
         Right.spin(forward);
